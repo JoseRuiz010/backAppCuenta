@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Jo.Cuenta.Model.Entity.Cuenta;
+import com.Jo.Cuenta.Model.Entity.EstadodeCuenta;
 import com.Jo.Cuenta.Model.Entity.LineaDeCuenta;
 import com.Jo.Cuenta.Model.ModelDAO.CuentaDAO;
 
 @Service
-public class CuentaServicesImpl implements IGenericService<Cuenta> {
+public class CuentaServicesImpl implements ICuentaService {
 
 	
 	@Autowired
@@ -31,7 +32,11 @@ public class CuentaServicesImpl implements IGenericService<Cuenta> {
 	@Override
 	public Cuenta crear(Cuenta producto) {
 		
-		return cuentaDao.save(producto);
+		
+		if(!existeCuentaActiva(EstadodeCuenta.activa)) {
+			Cuenta cuenta = cuentaDao.save(producto);		
+		}
+		return null;
 	}
 
 	@Override
@@ -76,6 +81,23 @@ public class CuentaServicesImpl implements IGenericService<Cuenta> {
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean existeCuentaActiva(EstadodeCuenta estado) {
+		// TODO Auto-generated method stub
+		return cuentaDao.existsByEstado(estado);
+	}
+
+	@Override
+	public Cuenta finalizarCuenta(Long id) {
+		Cuenta cuentaAct=getByID(id);
+		if(cuentaAct!=null) {
+			cuentaAct.FinalizrCuenta();
+			cuentaDao.save(cuentaAct);
+		}
+		
+		return null;
 	}
  
 

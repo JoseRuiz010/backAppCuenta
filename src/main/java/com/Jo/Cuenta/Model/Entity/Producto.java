@@ -32,5 +32,5 @@ public class Producto implements Serializable{
 	private String capacidad;
 	private String lineaGaceosa;
 	private Double precio=0.0;
- 
+	private String imgUrl;
 }

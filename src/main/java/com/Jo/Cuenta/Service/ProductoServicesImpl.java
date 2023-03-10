@@ -37,7 +37,12 @@ public class ProductoServicesImpl implements IProductoService {
 		Producto productoACT= productoDao.findById(id).orElse(null);
 		
 		if(productoACT!=null) {
-			productoACT.setNombre(producto.getNombre());	
+			productoACT.setNombre(producto.getNombre());
+			productoACT.setDescripcion(producto.getDescripcion());	
+			productoACT.setCapacidad(producto.getCapacidad());	
+			productoACT.setPrecio(producto.getPrecio());	
+			productoACT.setLineaGaceosa(producto.getLineaGaceosa());
+			productoACT.setImgUrl(producto.getImgUrl());
 		}
 		
 		

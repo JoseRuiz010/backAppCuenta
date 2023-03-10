@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.Jo.Cuenta.Model.Entity.Cuenta;
+import com.Jo.Cuenta.Model.Entity.EstadodeCuenta;
  
 
 @Repository
@@ -14,5 +15,6 @@ public interface CuentaDAO extends JpaRepository<Cuenta, Long> {
 	@Query("select cu from Cuenta cu join fetch cu.lineasCuenta lc join lc.producto where cu.id=?1")
 	public Cuenta fetchByIdWithClienteWithItemFacturaWhithProducto(Long id);
 	 
+	boolean existsByEstado(EstadodeCuenta estado) ;
 
 }

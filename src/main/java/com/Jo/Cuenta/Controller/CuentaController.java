@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Jo.Cuenta.Model.Entity.Cuenta;
+import com.Jo.Cuenta.Model.Entity.EstadodeCuenta;
 import com.Jo.Cuenta.Model.Entity.LineaDeCuenta;
 import com.Jo.Cuenta.Model.Entity.Producto;
 import com.Jo.Cuenta.Service.CuentaServicesImpl;
@@ -87,6 +88,15 @@ public Cuenta agregarLineaCuenta (@PathVariable Long id, @RequestBody List<Linea
 		return cuentaService.agregarLineaDeCuenta(lineasCuentas, id);
 		
 		}
-		   
+	
+	@GetMapping("/activa")
+	public boolean existeCuentaActiva() {
+		return cuentaService.existeCuentaActiva(EstadodeCuenta.activa);
+	}
+	
+	@GetMapping("/fin/{id}")
+	public Cuenta finalizarCuenta(@PathVariable Long id) {
+		return cuentaService.finalizarCuenta(id);
+	}
 	
 }

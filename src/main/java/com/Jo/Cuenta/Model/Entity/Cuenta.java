@@ -28,8 +28,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Cuenta implements Serializable{
-	
-	
 	/**
 	 * 
 	 */
@@ -49,6 +47,7 @@ public class Cuenta implements Serializable{
 	@PrePersist
 	public void setFechaInicioXDefault() {
 		this.Inicio= LocalDate.now();
+		this.setEstado(EstadodeCuenta.activa);
 	}
 	
 	public void addLineaCuenta(LineaDeCuenta lineac) {
@@ -57,6 +56,11 @@ public class Cuenta implements Serializable{
 			this.lineasCuenta= new ArrayList<LineaDeCuenta>();
 		}
 		this.lineasCuenta.add(lineac);	
+	}
+	
+	public void FinalizrCuenta() {
+		this.setEstado(EstadodeCuenta.pagada);
+		this.setFin(LocalDate.now());
 	}
 
 	
